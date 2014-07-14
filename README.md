@@ -1,3 +1,8 @@
 java8-playground
 ================
-Small project which shows the most important (my opinion) new features introduced with the Java8 standard
+Small project which shows the most important new features introduced in Java 8. 
+
+* Lambda expressions
+* Streams API
+* Parallel streams
+* Default interfaces
