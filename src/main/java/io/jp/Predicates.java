@@ -8,6 +8,6 @@ public class Predicates {
 
     public static final Predicate<String> LONG_NAMES = name -> name.length() > 5;
 
-    public static final Predicate<Integer> EVEN = number -> number % 2 == 0;
+    public static final Predicate<Integer> EVEN_NUMBER = number -> number % 2 == 0;
 
 }

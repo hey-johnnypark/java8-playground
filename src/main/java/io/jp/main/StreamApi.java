@@ -1,36 +1,24 @@
-package io.jp;
+package io.jp.main;
+
+import static io.jp.Helpers.NAMES;
+import static io.jp.Helpers.NUMBERS;
+import static io.jp.Helpers.PERSONS;
+import static io.jp.Helpers.TIME_ZONES;
+import static io.jp.Helpers.printHeading;
+import io.jp.Person;
+import io.jp.Predicates;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
-import static io.jp.Helpers.printHeading;
 
-public class Lambda {
-
-    private static final Collection<String> NAMES =
-        Arrays.asList("Peter", "Andi", "Sebastian", "Claus Kleber", "Andreas", "Andi", "Peter");
-
-    private static final Collection<String> TIME_ZONES = Arrays.asList(TimeZone.getAvailableIDs());
-
-    private static final Collection<Person> PERSONS = Arrays.asList(
-        new Person("Max", "Mustermann"),
-        new Person("Peter", "Funke"),
-        new Person("Max", "Hinterseer"),
-        new Person("Peter", "Krause"),
-        new Person("Andreas", "Möller")
-        );
-
-    private static final Collection<Integer> NUMBERS =
-        Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+public class StreamApi {
 
     public static void main(String[] args) throws IOException {
-
         printHeading("Filter long and print out long names (length > 5)");
         NAMES.stream().filter(Predicates.LONG_NAMES).forEach(System.out::println);
 
@@ -38,19 +26,20 @@ public class Lambda {
         System.out.println(NAMES.stream().filter(Predicates.LONG_NAMES).count());
 
         printHeading("Filter and print out even numbers");
-        NUMBERS.stream().filter(Predicates.EVEN).forEach(System.out::println);
+        NUMBERS.stream().filter(Predicates.EVEN_NUMBER).forEach(System.out::println);
 
         printHeading("Filter and multiply even numbers with theirself");
-        NUMBERS.stream().filter(Predicates.EVEN).mapToInt((i) -> (i * i)).forEach(System.out::println);
+        NUMBERS.stream().filter(Predicates.EVEN_NUMBER).mapToInt((i) -> (i * i)).forEach(System.out::println);
 
         printHeading("Filter even numbers and apply reduce algorithm");
-        System.out.println("Reduce result: " + NUMBERS.stream().filter(Predicates.EVEN).reduce((a, b) -> {
+        System.out.println("Reduce result: " + NUMBERS.stream().filter(Predicates.EVEN_NUMBER).reduce((a, b) -> {
             System.out.println(a + " + " + b + " = " + (a + b));
             return a + b;
         }).get());
 
         printHeading("Filter even numbers and apply reduce algorithm staring with 100");
-        System.out.println("Reduce result: " + NUMBERS.stream().filter(Predicates.EVEN).reduce(100, (a, b) -> a + b));
+        System.out.println("Reduce result: "
+            + NUMBERS.stream().filter(Predicates.EVEN_NUMBER).reduce(100, (a, b) -> a + b));
 
         printHeading("Collect and map persons with same firstname");
         Map<String, List<Person>> personsByFirstName = PERSONS.stream().collect(
