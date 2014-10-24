@@ -6,3 +6,4 @@ Small project which shows the most important new features introduced in Java 8.
 * Streams API
 * Parallel streams
 * Default interfaces
+* Changes
